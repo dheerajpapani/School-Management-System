@@ -1,0 +1,25 @@
+version: 1.0
+
+execution:
+
+  ordering: sequential
+
+  allow_dynamic_insertion: true
+
+  allow_task_split: true
+
+  approval_after_each_task: true
+
+tasks: []
+
+summary:
+
+  completed: 0
+
+  pending: 0
+
+  blocked: 0
+
+  total: 0
+
+next_task: null

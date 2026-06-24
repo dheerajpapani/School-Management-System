@@ -1,0 +1,114 @@
+```yaml
+version: 1.0
+
+session:
+
+  id: SESSION-001
+
+  status: idle
+  # idle | running | waiting_for_user | blocked | completed
+
+  mode: documentation
+  # documentation | implementation | testing | deployment
+
+  started_at: null
+  ended_at: null
+  last_updated: null
+
+agent:
+
+  name: Repository Agent
+
+  version: 1.0
+
+execution:
+
+  current_phase: Documentation Generation
+
+  current_task_id: null
+
+  current_task_name: null
+
+  current_file: null
+
+  current_step: Initialize
+
+  next_step: Read Manifest
+
+context:
+
+  loaded_files: []
+
+  dependency_files: []
+
+  cache_enabled: true
+
+  repository_scan: false
+
+changes:
+
+  files_created: []
+
+  files_updated: []
+
+  files_deleted: []
+
+validation:
+
+  status: pending
+  # pending | passed | failed
+
+  checklist_completed: false
+
+summary:
+
+  generated: false
+
+  summary_file: docgen/06_SUMMARY.md
+
+approval:
+
+  required: true
+
+  waiting: false
+
+  approved: false
+
+resume:
+
+  resume_supported: true
+
+  checkpoint: null
+
+  last_successful_step: null
+
+  restart_from: Initialize
+
+errors:
+
+  blocked: false
+
+  reason: null
+
+  requires_user: false
+
+history:
+
+  previous_session: null
+
+  previous_task: null
+
+  previous_file: null
+
+statistics:
+
+  execution_cycles: 0
+
+  completed_tasks: 0
+
+  generated_documents: 0
+
+  implementation_tasks: 0
+
+notes: []
+```

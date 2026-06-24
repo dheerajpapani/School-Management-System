@@ -1,0 +1,51 @@
+session:
+
+  execution_id: DOCGEN-000
+
+  status: Ready
+
+  mode: documentation
+
+current:
+
+  phase: AgentOS
+
+  task: null
+
+  document: null
+
+progress:
+
+  completed: 0
+
+  pending: 0
+
+  blocked: 0
+
+  total: 0
+
+resume:
+
+  next_task: null
+
+  last_completed: null
+
+context:
+
+  loaded: []
+
+blockers: []
+
+statistics:
+
+  execution_cycles: 0
+
+  generated_documents: 0
+
+  updated_documents: 0
+
+  roadmap_updates: 0
+
+  dependency_updates: 0
+
+last_updated: null

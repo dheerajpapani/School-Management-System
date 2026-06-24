@@ -1,0 +1,37 @@
+version: 1.0
+
+project:
+  name: School Management System
+  type: Enterprise Application
+
+agent:
+  mode: documentation
+  autonomous: true
+  approval_required: true
+  one_task_per_cycle: true
+  dynamic_task_insertion: true
+  resume_supported: true
+
+entry_points:
+  documentation: docgen/07_PROMPT.md
+  implementation: agent/00_AGENT.md
+
+execution:
+  read_manifest: true
+  read_state: true
+  read_roadmap: true
+  read_dependencies: true
+  validate_before_complete: true
+  update_state: true
+  update_summary: true
+  stop_after_task: true
+
+repository:
+  architecture: docs/
+  agent_os: agent/
+  documentation_engine: docgen/
+  machine_state: agent-db/
+
+status:
+  current_stage: Documentation Generation
+  lifecycle: Active

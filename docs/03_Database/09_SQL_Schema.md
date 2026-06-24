@@ -2,510 +2,627 @@
 
 ## Objective
 
-You are acting as a Principal Database Architect and Senior MySQL Engineer responsible for generating the production-ready SQL schema for an Enterprise School Management System (SMS).
+You are acting as a Principal Enterprise Database Architect responsible for designing the complete SQL Schema Specification for an Enterprise School Management System (SMS).
 
-This document is the authoritative physical database specification for the entire School Management System.
+This document is the authoritative physical database specification derived from the previously completed architecture documents including:
 
-It must implement every architectural decision defined in all previously generated documentation.
+- Database Architecture
+- Entity Catalog
+- Entity Relationships
+- Normalization Strategy
+- Indexing Strategy
+- Partitioning Strategy
+- Audit Strategy
+- Migration Strategy
 
-Assume every previous document is authoritative.
+This document translates the logical database model into a complete physical relational schema specification while remaining implementation-independent.
 
-Do not invent business rules.
+It is NOT intended to generate SQL statements.
 
-Do not simplify the schema.
+Instead, it defines every physical database design decision required before implementation.
 
-This SQL is intended to be production-ready.
+Assume every business module, entity catalog, API catalog, contracts, workflows, and security documents already exist.
 
----
-
-## Target Platform
-
-- PHP 8.1+
-- MySQL 8.0+
-- InnoDB
-- utf8mb4
-- utf8mb4_unicode_ci
-
----
-
-## General Rules
-
-Before generating any SQL:
-
-1. Review all previously generated SQL.
-2. Validate consistency.
-3. Validate naming.
-4. Validate FK references.
-5. Validate indexes.
-6. Validate normalization.
-7. Report inconsistencies before generating new SQL.
-
-Never regenerate previous tables.
-
-Only append new tables.
-
-Never modify previous SQL unless explicitly instructed.
+Reference previous documentation rather than duplicating it.
 
 ---
 
-## Table Standards
+# Scope
 
-Every table must use:
+Generate the complete SQL Schema Specification covering:
 
-CREATE TABLE IF NOT EXISTS
+Entire Enterprise School Management System including:
 
-Every table should include wherever applicable:
+Master Administration
 
-- id
-- uuid
-- created_at
-- updated_at
-- deleted_at
-- created_by
-- updated_by
-- deleted_by
-- version
-- status
+Student
 
-Use:
+Academic
 
-PRIMARY KEY
+Attendance
 
-UNIQUE
+Examination
 
-INDEX
+Fees
 
-FOREIGN KEY
+Timetable
 
-CHECK constraints where appropriate
+Homework
 
-Comments
+LMS
 
-Soft Delete compatibility
+Communication
 
-Audit compatibility
+Parent Portal
 
-Future extensibility
+Transport
+
+Hostel
+
+Library
+
+Inventory
+
+HRMS
+
+Discipline
+
+Events
+
+Alumni
+
+Audit
+
+Reporting
+
+Background Processing
+
+Configuration
+
+Future Extensions
 
 ---
 
-## Naming Convention
+# Enterprise Database Principles
 
-Tables
+Database remains normalized.
 
-sms_
+Every table has a single ownership domain.
 
-Example
+Primary keys remain immutable.
 
-sms_students
+Business identifiers remain version-safe.
 
-Columns
+Audit information is standardized.
 
-snake_case
+Soft deletion follows institutional policies.
+
+Foreign key relationships remain explicit.
+
+Historical data is preserved.
+
+Large transactional tables support partitioning.
+
+Indexes follow the indexing strategy.
+
+Database remains vendor-neutral.
+
+---
+
+# Document Structure
+
+## 1. Physical Database Overview
+
+Describe:
+
+Database Purpose
+
+Physical Architecture
+
+Logical vs Physical Mapping
+
+Database Boundaries
+
+Naming Standards
+
+Object Organization
+
+Storage Philosophy
+
+Normalization Level
+
+Historical Data Strategy
+
+Future Growth
+
+---
+
+## 2. Schema Organization
+
+Define database schemas such as:
+
+Administration
+
+Academic
+
+Student
+
+Attendance
+
+Examination
+
+Fees
+
+Learning
+
+Communication
+
+Operations
+
+Reporting
+
+Audit
+
+Security
+
+Configuration
+
+Integration
+
+Background Jobs
+
+Future Extensions
+
+For every schema explain:
+
+Purpose
+
+Contained Tables
+
+Ownership
+
+Dependencies
+
+Security Classification
+
+Growth Expectations
+
+---
+
+## 3. Physical Table Catalog
+
+Generate the complete physical table catalog.
+
+For every table define:
+
+Owning Module
+
+Schema
+
+Business Purpose
+
+Primary Key
+
+Business Keys
 
 Foreign Keys
 
-entity_id
+Unique Constraints
 
-Indexes
+Nullable Rules
 
-idx_
+Audit Columns
 
-Unique
+Soft Delete Strategy
 
-uq_
+Partition Strategy
+
+Archive Strategy
+
+Growth Characteristics
+
+Retention Policy
+
+Dependencies
+
+Expected Relationships
+
+Read Patterns
+
+Write Patterns
+
+Reporting Usage
+
+Future Extension Notes
+
+Generate for every table across all modules.
+
+---
+
+## 4. Standard Column Conventions
+
+Define standard columns including:
+
+Primary Keys
 
 Foreign Keys
 
-fk_
+Business Codes
 
-Checks
+Created By
 
-chk_
+Created At
+
+Updated By
+
+Updated At
+
+Deleted At
+
+Deleted By
+
+Version
+
+Status
+
+Lifecycle State
+
+Approval State
+
+Audit Identifier
+
+Tenant Identifier (future)
+
+Synchronization Identifier
+
+Correlation Identifier
+
+External Identifier
+
+Import Identifier
+
+Explain usage standards.
 
 ---
 
-## SQL Requirements
+## 5. Constraint Standards
 
-Generate:
+Define standards for:
 
-Production-quality SQL
+Primary Keys
 
-Normalized schema
+Foreign Keys
 
-Proper data types
+Unique Constraints
 
-Proper constraints
+Composite Keys
 
-Proper FK relationships
+Business Constraints
 
-Proper indexes
+Check Constraints
 
-Consistent naming
+Nullable Rules
 
-Scalable design
+Default Values
 
-No TODOs
+Referential Integrity
 
-No placeholders
+Cascade Rules
 
-No incomplete tables
+Historical Constraints
+
+Soft Delete Constraints
+
+Version Constraints
 
 ---
 
-## Output Format
+## 6. Relationship Standards
 
-Every generation must contain:
+Describe standards for:
 
-1. Scope
-2. SQL
-3. Dependency Notes
-4. Validation Checklist
-5. Completed Tables
-6. Remaining Tables
+One-to-One
 
----part-1---
-Continue building
+One-to-Many
 
-03_Database/09_SQL_Schema.md
+Many-to-Many
 
-using the previously generated SQL.
+Bridge Tables
 
-Do NOT regenerate previous tables.
-
-Generate only the Core Platform schema.
-
-Include:
-
-Institution
-
-Academic Years
-
-Academic Terms
-
-Branches
-
-Departments
-
-Classes
-
-Sections
-
-Users
-
-Authentication
-
-Roles
-
-Permissions
-
-Permission Groups
-
-Role Permissions
-
-User Roles
-
-Menus
-
-Menu Permissions
-
-Application Settings
-
-Configurations
-
-Countries
-
-States
-
-Cities
-
-Currencies
-
-Languages
-
-Timezones
-
-Academic Calendar metadata
+Hierarchy Tables
 
 Lookup Tables
 
 Reference Tables
 
-Notification Templates
+Temporal Relationships
 
-Feature Flags
+Versioned Relationships
 
-Application Metadata
+Historical Relationships
 
-System Metadata
+Ownership Relationships
 
-Background Job Metadata
+---
 
-File Metadata
+## 7. Data Type Standards
 
-Generate complete CREATE TABLE statements.
+Define enterprise standards for:
 
-Include:
+Identifiers
+
+Codes
+
+Names
+
+Descriptions
+
+Money
+
+Percentages
+
+Dates
+
+Times
+
+DateTime
+
+Time Zone
+
+Boolean
+
+JSON Readiness
+
+Binary Files
+
+Large Text
+
+Version Numbers
+
+Status Values
+
+Enumerations
+
+UUID Readiness
+
+Future Globalization
+
+---
+
+## 8. Naming Standards
+
+Define standards for:
+
+Schemas
+
+Tables
+
+Columns
 
 Indexes
 
-Unique Constraints
+Constraints
 
-Foreign Keys
+Views
 
-Comments
+Sequences
 
-Soft Delete
+Triggers
 
-Audit fields
+Functions
+
+Materialized Views
+
+Bridge Tables
+
+History Tables
+
+Temporary Tables
+
+Archive Tables
+
+Import Tables
+
+Export Tables
+
+---
+
+## 9. Database Object Standards
+
+Describe standards for:
+
+Tables
+
+Views
+
+Materialized Views
+
+History Tables
+
+Archive Tables
+
+Bridge Tables
+
+Lookup Tables
+
+Reference Tables
+
+Temporary Tables
+
+Import Tables
+
+Export Tables
+
+Sequences
+
+Synonyms (future)
+
+---
+
+## 10. Reporting Model
+
+Describe:
+
+Reporting Views
+
+Aggregated Views
+
+Materialized Views
+
+Operational Views
+
+Executive Views
+
+Analytics Views
+
+Dashboard Views
+
+Historical Views
+
+Snapshot Views
+
+Security Views
+
+Read-only Views
+
+Future Data Warehouse Readiness
+
+---
+
+## 11. Performance Considerations
+
+Discuss:
+
+Partition Alignment
+
+Index Alignment
+
+Large Tables
+
+Historical Tables
+
+Archiving
+
+Compression Readiness
+
+Read Optimization
+
+Write Optimization
+
+Reporting Optimization
+
+Concurrency
+
+Future Horizontal Scaling
+
+---
+
+## 12. Migration Readiness
+
+Describe:
+
+Schema Evolution
+
+Backward Compatibility
+
+Forward Compatibility
+
+Migration Order
+
+Reference Data
+
+Seed Data
 
 Versioning
 
-Status
+Rollback Strategy
 
-Use production-quality MySQL 8 SQL.
+Deployment Strategy
 
-Finish with:
+Validation
 
-Completed Tables
-
-Dependencies
-
-Validation Checklist
-
-Remaining Tables.
-
----part-2---
-Continue generating the existing document:
-
-docs/03_Database/09_SQL_Schema.md
-
-This is **Part 2** of the complete production SQL schema.
-
-Do NOT regenerate or modify any SQL generated in previous parts unless a consistency issue is detected.
+Verification
 
 ---
 
-## Step 1 — Review Previous SQL
+## 13. AI Coding Agent Guidance
 
-Before generating any new SQL:
+Provide implementation guidance covering:
 
-Review all previously generated SQL from Part 1.
+Database creation order
 
-Validate:
+Schema order
 
-- Naming conventions
-- Table prefixes (`sms_`)
-- Primary keys
-- UUID usage
-- Audit fields
-- Soft delete support
-- Foreign key consistency
-- Unique constraints
-- Index naming
-- Normalization
-- Status fields
-- Version fields
-- Timestamp consistency
+Lookup tables
 
-If any inconsistency is found:
+Reference tables
 
-- Report it first.
-- Explain the impact.
-- Propose the smallest correction.
-- Do not silently change previous SQL.
+Master tables
 
-Only continue if validation passes.
+Transactional tables
 
----
+History tables
 
-## Step 2 — Generate ONLY the Student Information System schema
+Bridge tables
 
-Do NOT generate any tables outside this scope.
+Indexes
 
-Generate complete production-ready SQL for:
+Constraints
 
-### Admission
+Views
 
-- Admission Enquiries
-- Admission Applications
-- Online Applications
-- Admission Status Tracking
-- Admission Tests
-- Test Results
-- Interview Scheduling
-- Interview Evaluation
-- Merit Lists
-- Admission Approvals
-- Admission Documents
+Reporting
 
-### Student Core
+Migration sequencing
 
-- Students
-- Student Academic Assignment
-- Student Roll Number History
-- Student Status History
-- Student Promotion History
-- Student Transfer History
-- Student Exit Records
-- Student Graduation Records
+Avoiding circular references
 
-### Parent & Guardian
+Repository mapping
 
-- Parents
-- Guardians
-- Parent-Student Relationship
-- Guardian Authorization
-- Emergency Contacts
+Entity mapping
 
-### Student Profile
-
-- Personal Information
-- Family Information
-- Academic Information
-- Medical Information
-- Hostel Information
-- Transport Information
-
-### Student Documents
-
-Generate document tables for:
-
-- Birth Certificate
-- Aadhaar
-- Transfer Certificate
-- Previous Marksheets
-- Medical Records
-- Identity Proofs
-- Passport Photos
-- Custom Documents
-
-Support:
-
-- Document Type
-- Verification Status
-- Expiry Date
-- Version
-- Upload Metadata
-- Verification History
-
-### Student Notes
-
-Generate tables for:
-
-- Counseling Notes
-- Administrative Notes
-- Teacher Notes
-- Parent Meeting Notes
-
-### Student Lifecycle
-
-Generate lifecycle support tables for:
-
-- Promotion
-- Section Change
-- Branch Transfer
-- Graduation
-- Alumni Preparation
-- Withdrawal
-- Suspension
-- Reinstatement
-
-### Student History
-
-Generate historical tracking tables for:
-
-- Class History
-- Section History
-- Academic Year History
-- Status History
-- Roll Number History
+Future ORM generation
 
 ---
 
-## SQL Requirements
+## 14. Architecture Decision Summary
 
-Every table must use:
+Generate a summary table.
 
-CREATE TABLE IF NOT EXISTS
+Columns:
 
-Use:
+Area
 
-ENGINE=InnoDB
+Decision
 
-utf8mb4
+Reason
 
-utf8mb4_unicode_ci
+Business Impact
 
-Include wherever applicable:
+Technical Impact
 
-- id
-- uuid
-- created_at
-- updated_at
-- deleted_at
-- created_by
-- updated_by
-- deleted_by
-- version
-- status
-
-Include:
-
-- Primary Keys
-- Foreign Keys
-- Unique Constraints
-- Composite Indexes
-- Lookup Indexes
-- Check Constraints where appropriate
-- Comments
-- Audit compatibility
-
-Do NOT omit foreign keys.
-
-Do NOT leave placeholder columns.
-
-Do NOT leave TODOs.
-
-Do NOT simplify the schema.
-
-Design for production use.
-
-Support:
-
-- 10,000+ students
-- Multi-academic year history
-- High-performance queries
-- Auditability
-- Future extensibility
+Future Extension
 
 ---
 
-## Finish with
+# Writing Style
 
-### Completed Tables
+Maintain the tone of a professional Enterprise SQL Schema Specification.
 
-List every table created.
+Do NOT generate:
 
-### Dependencies
+- SQL CREATE TABLE statements
 
-List all referenced tables from Part 1.
+- DDL
 
-### Validation Checklist
+- Database vendor syntax
 
-Confirm:
+- Stored procedures
 
-- FK integrity
-- Naming consistency
-- Normalization
-- Index coverage
-- Audit compatibility
-- Soft delete compatibility
+- Functions
 
-### Remaining SQL
+- Triggers
 
-List what will be generated in Part 3 only.
+Instead describe the complete physical schema architecture in implementation-independent language.
 
-Do not generate Part 3.
-
----part-3---
+This document should become the definitive blueprint from which SQL Server, PostgreSQL, MySQL, Oracle, MariaDB, or any enterprise RDBMS schema can be generated without additional architectural decisions.

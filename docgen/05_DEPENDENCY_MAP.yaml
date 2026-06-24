@@ -1,0 +1,113 @@
+```yaml
+version: 1.0
+
+description: >
+  Defines the minimum required files that must be loaded before generating
+  each documentation file. The generator must never scan the repository.
+  It should load only the files listed here.
+
+tasks:
+
+  DOCGEN-001:
+    reads: []
+    writes:
+      - docgen/00_MANIFEST.md
+
+  DOCGEN-002:
+    reads:
+      - docgen/00_MANIFEST.md
+    writes:
+      - docgen/01_WORKFLOW.md
+
+  DOCGEN-003:
+    reads:
+      - docgen/00_MANIFEST.md
+      - docgen/01_WORKFLOW.md
+    writes:
+      - docgen/02_RULES.md
+
+  DOCGEN-004:
+    reads:
+      - docgen/00_MANIFEST.md
+      - docgen/01_WORKFLOW.md
+      - docgen/02_RULES.md
+    writes:
+      - docgen/03_STATE.md
+
+  DOCGEN-005:
+    reads:
+      - docgen/00_MANIFEST.md
+      - docgen/01_WORKFLOW.md
+      - docgen/02_RULES.md
+      - docgen/03_STATE.md
+    writes:
+      - docgen/04_ROADMAP.yaml
+
+  DOCGEN-006:
+    reads:
+      - docgen/00_MANIFEST.md
+      - docgen/01_WORKFLOW.md
+      - docgen/02_RULES.md
+      - docgen/03_STATE.md
+      - docgen/04_ROADMAP.yaml
+    writes:
+      - docgen/05_DEPENDENCY_MAP.yaml
+
+  DOCGEN-007:
+    reads:
+      - docgen/03_STATE.md
+      - docgen/04_ROADMAP.yaml
+      - docgen/05_DEPENDENCY_MAP.yaml
+    writes:
+      - docgen/06_SUMMARY.md
+
+  DOCGEN-008:
+    reads:
+      - docgen/00_MANIFEST.md
+      - docgen/01_WORKFLOW.md
+      - docgen/02_RULES.md
+      - docgen/03_STATE.md
+      - docgen/04_ROADMAP.yaml
+      - docgen/05_DEPENDENCY_MAP.yaml
+      - docgen/06_SUMMARY.md
+    writes:
+      - docgen/07_PROMPT.md
+
+  DOCGEN-009:
+    reads:
+      - docgen/00_MANIFEST.md
+      - docgen/01_WORKFLOW.md
+      - docgen/02_RULES.md
+      - docgen/07_PROMPT.md
+    writes:
+      - docgen/08_CHECKLIST.md
+
+defaults:
+
+  never_scan_repository: true
+
+  load_only_declared_dependencies: true
+
+  allow_dynamic_dependency_insertion: true
+
+  update_after_generation: true
+
+  validate_dependencies_before_generation: true
+
+dynamic_dependency_rule:
+
+  description: >
+    If a missing prerequisite is discovered during generation,
+    insert a new task into ROADMAP.yaml, update this dependency map,
+    generate the prerequisite first, then resume the original task.
+
+context_policy:
+
+  maximum_scope: Active Task Only
+
+  minimum_context: true
+
+  prefer_existing_documents: true
+
+  avoid_duplicate_loading: true
+```

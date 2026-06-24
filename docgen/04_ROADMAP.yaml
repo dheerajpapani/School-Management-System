@@ -1,0 +1,93 @@
+```yaml
+version: 1.0
+
+project: School Management System
+
+stage: Documentation Generation
+
+current_phase: AgentOS
+
+execution_mode: Sequential
+
+allow_dynamic_insertion: true
+
+allow_task_split: true
+
+approval_required_after_each_task: true
+
+resume_from_first_pending: true
+
+tasks:
+
+  - id: DOCGEN-001
+    name: Create Agent Manifest
+    file: docgen/00_MANIFEST.md
+    status: done
+    depends_on: []
+
+  - id: DOCGEN-002
+    name: Create Documentation Workflow
+    file: docgen/01_WORKFLOW.md
+    status: done
+    depends_on:
+      - DOCGEN-001
+
+  - id: DOCGEN-003
+    name: Create Documentation Rules
+    file: docgen/02_RULES.md
+    status: done
+    depends_on:
+      - DOCGEN-002
+
+  - id: DOCGEN-004
+    name: Create Documentation State
+    file: docgen/03_STATE.md
+    status: done
+    depends_on:
+      - DOCGEN-003
+
+  - id: DOCGEN-005
+    name: Create Documentation Roadmap
+    file: docgen/04_ROADMAP.yaml
+    status: done
+    depends_on:
+      - DOCGEN-004
+
+  - id: DOCGEN-006
+    name: Create Dependency Map
+    file: docgen/05_DEPENDENCY_MAP.yaml
+    status: pending
+    depends_on:
+      - DOCGEN-005
+
+  - id: DOCGEN-007
+    name: Create Execution Summary
+    file: docgen/06_SUMMARY.md
+    status: pending
+    depends_on:
+      - DOCGEN-006
+
+  - id: DOCGEN-008
+    name: Create Master Prompt
+    file: docgen/07_PROMPT.md
+    status: pending
+    depends_on:
+      - DOCGEN-007
+
+  - id: DOCGEN-009
+    name: Create Validation Checklist
+    file: docgen/08_CHECKLIST.md
+    status: pending
+    depends_on:
+      - DOCGEN-008
+
+next_task: DOCGEN-006
+
+completed: 5
+
+pending: 4
+
+blocked: 0
+
+total: 9
+```

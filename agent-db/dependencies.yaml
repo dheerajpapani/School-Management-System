@@ -1,0 +1,23 @@
+version: 1.0
+
+rules:
+
+  load_only_required_dependencies: true
+
+  never_scan_repository: true
+
+  allow_dynamic_dependency_updates: true
+
+  validate_before_execution: true
+
+dependencies: {}
+
+context:
+
+  strategy: minimal
+
+  cache: enabled
+
+  maximum_scope: active_task
+
+  prefer_existing_documents: true
